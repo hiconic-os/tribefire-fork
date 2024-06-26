@@ -1,0 +1,43 @@
+<!--
+Copyright BRAINTRIBE TECHNOLOGY GMBH, Austria, 2002-2022
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+-->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>tribefire.extension.server-sent-events</groupId>
+    <artifactId>parent</artifactId>
+    <version>3.0.5</version>
+    <packaging>pom</packaging>
+    <properties>
+        <java.version>21</java.version>
+        <V.tribefire.extension.server-sent-events>[3.0,3.1)</V.tribefire.extension.server-sent-events>
+        <V.com.braintribe.gm>[2.0,2.1)</V.com.braintribe.gm>
+        <V.com.braintribe.servlet>[2.0,2.1)</V.com.braintribe.servlet>
+        <V.com.braintribe.wire>[2.0,2.1)</V.com.braintribe.wire>
+        <V.tribefire.cortex>[3.0,3.1)</V.tribefire.cortex>
+        <V.tribefire.setup.classic.env>[3.0,3.1)</V.tribefire.setup.classic.env>
+        <V.tribefire.extension.vitals.jdbc>[3.0,3.1)</V.tribefire.extension.vitals.jdbc>
+        <V.javax.servlet>3.0.1</V.javax.servlet>
+        <V.org.apache.httpcomponents_httpasyncclient>4.1.5</V.org.apache.httpcomponents_httpasyncclient>
+        <V.tribefire.extension.web-api>[1.0,1.1)</V.tribefire.extension.web-api>
+    </properties>
+    <licenses>
+        <license>
+            <name>Apache License, Version 2.0</name>
+            <url>https://www.apache.org/licenses/LICENSE-2.0</url>
+            <distribution>repo</distribution>
+            <comments>A business-friendly OSS license</comments>
+        </license>
+    </licenses>
+</project>

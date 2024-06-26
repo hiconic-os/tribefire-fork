@@ -1,0 +1,114 @@
+<!--
+Copyright BRAINTRIBE TECHNOLOGY GMBH, Austria, 2002-2022
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+-->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>tribefire.extension.hydrux</groupId>
+        <artifactId>parent</artifactId>
+        <version>[2.1,2.2)</version>
+    </parent>
+    <artifactId>hx-demo-setup</artifactId>
+    <version>2.1.11</version>
+    <properties>
+    </properties>
+    <licenses>
+        <license>
+            <name>Apache License, Version 2.0</name>
+            <url>https://www.apache.org/licenses/LICENSE-2.0</url>
+            <distribution>repo</distribution>
+            <comments>A business-friendly OSS license</comments>
+        </license>
+    </licenses>
+    <dependencies>
+        <!-- Web Platform and necessary modules -->
+		<dependency>
+			<groupId>tribefire.cortex.assets</groupId>
+			<artifactId>tribefire-initial-aggregator</artifactId>
+			<version>${V.tribefire.cortex.assets}</version>
+			<classifier>asset</classifier>
+			<type>man</type>
+			<?tag asset?>
+		</dependency>
+		<dependency>
+			<groupId>tribefire.cortex.services</groupId>
+			<artifactId>tribefire-web-platform</artifactId>
+			<version>${V.tribefire.cortex.services}</version>
+			<classifier>asset</classifier>
+			<type>man</type>
+			<?tag asset?>
+		</dependency>
+		<dependency>
+			<groupId>tribefire.extension.web-api</groupId>
+			<artifactId>web-rpc-server-module</artifactId>
+			<version>${V.tribefire.extension.web-api}</version>
+			<classifier>asset</classifier>
+			<type>man</type>
+			<?tag asset?>
+        </dependency>
+        <dependency>
+			<groupId>tribefire.extension.web-api</groupId>
+			<artifactId>ws-module</artifactId>
+			<version>${V.tribefire.extension.web-api}</version>
+			<?tag asset?>
+		</dependency>
+        <!-- TF Explorer -->
+		<dependency>
+			<groupId>tribefire.app.explorer</groupId>
+			<artifactId>tribefire-explorer-aggregator</artifactId>
+			<version>${V.tribefire.app.explorer}</version>
+			<classifier>asset</classifier>
+			<type>man</type>
+			<?tag asset?>
+		</dependency>
+
+        <!-- Hydrux Demo -->
+        <dependency>
+            <groupId>tribefire.extension.hydrux</groupId>
+            <artifactId>hx-demo-initializer</artifactId>
+            <version>${V.tribefire.extension.hydrux}</version>
+            <classifier>asset</classifier>
+            <type>man</type>
+            <?tag asset?>
+        </dependency>
+        <dependency>
+            <groupId>tribefire.extension.hydrux</groupId>
+            <artifactId>hx-demo-module</artifactId>
+            <version>${V.tribefire.extension.hydrux}</version>
+            <classifier>asset</classifier>
+            <type>man</type>
+            <?tag asset?>
+        </dependency>
+
+        <!-- Prototyping - no specific artifact for server side, 
+            client (hx-prototyping-demo-hx-module) only uses generic server-side extensions - hydrux-prototyping-initializer -->
+        <dependency>
+            <groupId>tribefire.extension.hydrux</groupId>
+            <artifactId>hydrux-prototyping-initializer</artifactId>
+            <version>${V.tribefire.extension.hydrux}</version>
+            <classifier>asset</classifier>
+            <type>man</type>
+            <?tag asset?>
+        </dependency>
+        <dependency>
+            <groupId>tribefire.extension.hydrux</groupId>
+            <artifactId>hx-prototyping-demo-hx-module</artifactId>
+            <version>${V.tribefire.extension.hydrux}</version>
+            <classifier>asset</classifier>
+            <type>man</type>
+            <?tag asset?>
+        </dependency>
+    </dependencies>
+</project>

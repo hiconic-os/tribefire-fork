@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Copyright BRAINTRIBE TECHNOLOGY GMBH, Austria, 2002-2022
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+-->
+<?eclipse version="3.4"?>
+<plugin>
+<!--
+		PREFERENCES 
+	-->
+	<!-- preference pages -->
+   	<extension
+         point="org.eclipse.ui.preferencePages">
+      <page      		      		
+      		category="com.braintribe.devrock.main"
+            class="com.braintribe.devrock.mungojerry.preferences.MungojerryPreferencePage"
+            id="com.braintribe.devrock.mungojerry.preferences.MungojerryPreferencePage"
+            name="Mungojerry">
+      </page>
+      <page
+       		category="com.braintribe.devrock.mungojerry.preferences.MungojerryPreferencePage"
+            class="com.braintribe.devrock.mungojerry.preferences.maven.MavenPreferencesPage"
+            id="com.braintribe.devrock.mungojerry.preferences.maven.MavenPreferencesPage"
+            name="Maven integration">
+      </page>        
+    </extension>
+    
+     <extension point="org.eclipse.ui.startup">
+     	<startup class="com.braintribe.devrock.mungojerry.plugin.StartupHandler">
+      	</startup>
+   	</extension>
+    
+   <!--
+   		COMMANDS  
+   -->
+   <!-- command declaration-->
+   <extension point="org.eclipse.ui.commands">
+   	<!-- gwt analyzer -->
+     <category id="com.braintribe.devrock.mungojerry.commands.category" name="Mungojerry's commands" />
+     <command categoryId="com.braintribe.devrock.mungojerry.commands.category" defaultHandler="com.braintribe.devrock.mungojerry.commands.MungojerryCommand" id="com.braintribe.devrock.mungojerry.commands.MungojerryCommand" name="Analyze GWT project"/>       
+    </extension>
+    <!-- command icons -->
+   <extension point="org.eclipse.ui.commandImages">
+   	<image commandId="com.braintribe.devrock.mungojerry.commands.MungojerryCommand" icon="icons/toolbox.png"/>
+   </extension>
+   <!-- context menu -->
+   <extension point="org.eclipse.ui.menus">				
+		<menuContribution allPopups="true" locationURI="popup:org.eclipse.ui.popup.any?after=additions">
+			<menu id="com.braintribe.devrock" label="Devrock">
+			<!--
+			<separator name="mySeparator" visible="true">
+        	</separator>
+        	-->
+        	<!-- project synchronizer -->
+        	<command commandId="com.braintribe.devrock.mungojerry.commands.MungojerryCommand" style="push" label="Analyze GWT project">   	
+				<visibleWhen>				
+					<with
+	                     variable="activeMenuSelection">
+						<iterate>
+							<or>
+								<adapt type="org.eclipse.core.resources.IProject">
+									<test property="org.eclipse.core.resources.open" value="open"/> 
+								</adapt>
+								<adapt type="org.eclipse.core.resources.IResource">
+									<test property="org.eclipse.core.resources.open" value="open"/>
+								</adapt>																							
+								<adapt type="org.eclipse.jdt.core.IPackageFragment"/>
+								<adapt type="org.eclipse.jdt.core.IPackageFragmentRoot"/>																	
+							</or>
+						</iterate>
+					</with>				
+				</visibleWhen>
+        	</command>          
+          <separator
+                  name="additions"
+                  visible="false">
+            </separator>	
+            </menu>
+		</menuContribution>
+	</extension>
+	<extension point="org.eclipse.ui.menus">
+     	<menuContribution locationURI="toolbar:org.eclipse.ui.main.toolbar?after=additions">
+        	<toolbar id="com.braintribe.devrock.artifactcontainer.commands.toolbar1">
+           		<command commandId="com.braintribe.devrock.mungojerry.commands.MungojerryCommand" id="com.braintribe.devrock.mungojerry.commands.MungojerryCommand.tb" style="push" tooltip="Analyze current project for GWT compliance"/>
+            </toolbar>
+     	</menuContribution>
+  	</extension>
+  	
+  	<!-- toolbar entries -->
+  	<extension point="org.eclipse.ui.menus">
+   		<menuContribution locationURI="menu:com.braintribe.devrock.mungojerry.commands.MungojerryCommand.tb">
+        	<command commandId="com.braintribe.devrock.mungojerry.commands.MungojerryCommand" label="Analyze GWT project" style="push" tooltip="Analyze current project for GWT compliance"/>           		
+        	<separator name="additions" visible="false"/>
+        </menuContribution>    
+  	</extension>
+        	
+</plugin>

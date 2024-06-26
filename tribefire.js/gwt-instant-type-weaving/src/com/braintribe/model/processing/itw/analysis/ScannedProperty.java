@@ -1,0 +1,97 @@
+// ============================================================================
+// Copyright BRAINTRIBE TECHNOLOGY GMBH, Austria, 2002-2022
+// 
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+// 
+//     http://www.apache.org/licenses/LICENSE-2.0
+// 
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+// ============================================================================
+package com.braintribe.model.processing.itw.analysis;
+
+import java.lang.reflect.Method;
+import java.lang.reflect.Type;
+
+import com.braintribe.model.generic.GenericEntity;
+import com.braintribe.model.generic.annotation.Initializer;
+
+class ScannedProperty {
+	public final Class<? extends GenericEntity> entityClass;
+	public final String propertyName;
+	public Method setter;
+	public Method getter;
+	public Type propertyType;
+
+	public ScannedProperty(Class<? extends GenericEntity> entityClass, String propertyName) {
+		this.entityClass = entityClass;
+		this.propertyName = propertyName;
+	}
+	
+	public String getPropertyName() {
+		return propertyName;
+	}
+
+	public Type getPropertyType() {
+		return propertyType;
+	}
+
+	public Class<?> getPropertyRawType() {
+		return getter.getReturnType();
+	}
+
+	private Type getSetterType() {
+		return setter != null ? setter.getGenericParameterTypes()[0] : null;
+	}
+
+	private Type getGetterType() {
+		return getter != null ? getter.getGenericReturnType() : null;
+	}
+
+	public String getInitializerString() {
+		Initializer gi = getter.getAnnotation(Initializer.class);
+		return gi == null ? null : gi.value();
+	}
+
+	@Override
+	public String toString() {
+		return "ScannedProperty[" + fullPropertyName() + "]";
+	}
+
+	public void validate() throws JavaTypeAnalysisException {
+		Type setterType = getSetterType();
+		Type getterType = JavaTypeAnalysis.sanitizeType(getGetterType());
+
+		if (setterType == null) {
+			try {
+				entityClass.getMethod(setterName(), getPropertyRawType());
+			} catch (Exception e) {
+				throw new JavaTypeAnalysisException("setter not found for property: " + fullPropertyName());
+			}
+
+			return;
+		}
+
+		// This must be equals cause for parameterized types we can have different instances being equal
+		if (!setterType.equals(getterType)) {
+			throw new JavaTypeAnalysisException(
+					"setter type (" + setterType + ") does not match getter type (" + getterType + ") for property: " + fullPropertyName());
+		}
+
+		propertyType = getterType;
+	}
+
+	private String setterName() {
+		return "s" + getter.getName().substring(1);
+	}
+
+	private String fullPropertyName() {
+		return entityClass.getName() + "." + propertyName;
+	}
+
+}

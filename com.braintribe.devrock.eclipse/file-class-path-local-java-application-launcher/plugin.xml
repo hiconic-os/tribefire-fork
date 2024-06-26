@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Copyright BRAINTRIBE TECHNOLOGY GMBH, Austria, 2002-2022
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+-->
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.eclipse.debug.core.launchConfigurationTypes">
+      <launchConfigurationType
+            delegate="com.braintribe.eclipse.launching.FileClassPathLocalJavaApplicationLauncher"
+            delegateDescription="uses a sepcial classloader and a file instead of the limited command line argument &quot;-classpath&quot;"
+            delegateName="Java Application (using file based classpath)"
+            id="com.braintribe.eclipse.launching.bigClassPathLocalJavaApplication"
+            modes="run, debug"
+            name="Java Application (using file based classpath)"
+            sourceLocatorId="org.eclipse.jdt.launching.sourceLocator.JavaSourceLookupDirector"
+            sourcePathComputerId="org.eclipse.jdt.launching.sourceLookup.javaSourcePathComputer">
+      </launchConfigurationType>
+   </extension>
+   <extension
+         point="org.eclipse.debug.core.launchConfigurationTypes">
+      <launchConfigurationType
+            delegate="com.braintribe.eclipse.launching.FileClassPathJUnitLauncher"
+            delegateDescription="uses a sepcial classloader and a file instead of the limited command line argument &quot;-classpath&quot;"
+            delegateName="Junit (using file based classpath)"
+            id="com.braintribe.eclipse.launching.bigClassPathJUnit"
+            modes="run, debug"
+            name="JUnit (using file based classpath)"
+            sourceLocatorId="org.eclipse.jdt.launching.sourceLocator.JavaSourceLookupDirector"
+            sourcePathComputerId="org.eclipse.jdt.launching.sourceLookup.javaSourcePathComputer">
+      </launchConfigurationType>
+   </extension>
+   <extension
+         point="org.eclipse.debug.ui.launchConfigurationTabGroups">
+      <launchConfigurationTabGroup
+            class="org.eclipse.jdt.internal.debug.ui.launcher.LocalJavaApplicationTabGroup"
+            id="com.braintribe.eclipse.launching.bigClassPathLocalJavaApplicationTabGroup"
+            type="com.braintribe.eclipse.launching.bigClassPathLocalJavaApplication">
+      </launchConfigurationTabGroup>
+   </extension>
+   <extension
+         point="org.eclipse.debug.ui.launchConfigurationTabGroups">
+      <launchConfigurationTabGroup
+            class="org.eclipse.jdt.internal.debug.ui.launcher.LocalJavaApplicationTabGroup"
+            id="com.braintribe.eclipse.launching.bigClassPathLocalJavaApplicationTabGroup"
+            type="com.braintribe.eclipse.launching.bigClassPathJUnit">
+      </launchConfigurationTabGroup>
+   </extension>
+   <extension
+         point="org.eclipse.debug.ui.launchConfigurationTypeImages">
+      <launchConfigurationTypeImage
+            configTypeID="com.braintribe.eclipse.launching.bigClassPathLocalJavaApplication"
+            icon="icons/launch.png"
+            id="org.eclipse.jdt.debug.ui.launchConfigurationTypeImage.javaFileClassPath">
+      </launchConfigurationTypeImage>
+   </extension>
+   <extension
+         point="org.eclipse.debug.ui.launchConfigurationTypeImages">
+      <launchConfigurationTypeImage
+            configTypeID="com.braintribe.eclipse.launching.bigClassPathJUnit"
+            icon="icons/launch-junit.png"
+            id="org.eclipse.jdt.debug.ui.launchConfigurationTypeImage.javaFileClassPath">
+      </launchConfigurationTypeImage>
+   </extension>
+   <extension
+         point="org.eclipse.jdt.launching.runtimeClasspathEntryResolvers">
+      <runtimeClasspathEntryResolver
+            class="com.braintribe.artifactcontainer.plugin.container.ArtifactContainerRuntimeClasspathEntryResolver"
+            container="Braintribe.ArtifactClasspathContainer1"
+            id="Braintribe.ArtifactContainerRuntimeClasspathEntryResolver">
+      </runtimeClasspathEntryResolver>
+   </extension>
+</plugin>

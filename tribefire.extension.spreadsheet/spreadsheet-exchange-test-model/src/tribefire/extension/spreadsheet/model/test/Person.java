@@ -1,0 +1,56 @@
+// ============================================================================
+// Copyright BRAINTRIBE TECHNOLOGY GMBH, Austria, 2002-2022
+// 
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+// 
+//     http://www.apache.org/licenses/LICENSE-2.0
+// 
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+// ============================================================================
+package tribefire.extension.spreadsheet.model.test;
+
+import java.util.Date;
+
+import com.braintribe.model.generic.annotation.meta.TimeZoneless;
+import com.braintribe.model.generic.reflection.EntityType;
+import com.braintribe.model.generic.reflection.EntityTypes;
+
+public interface Person extends TestRecord {
+	EntityType<Person> T = EntityTypes.T(Person.class);
+
+	String firstName = "firstName";
+	String lastName = "lastName";
+	String birthDate = "birthDate";
+	String socialContractNumber = "socialContractNumber";
+	String hobby = "hobby";
+	String favouriteNumber = "favouriteNumber";
+	String hash = "hash";
+
+	String getFirstName();
+	void setFirstName(String firstName);
+
+	String getLastName();
+	void setLastName(String lastName);
+
+	@TimeZoneless
+	Date getBirthDate();
+	void setBirthDate(Date birthDate);
+
+	String getSocialContractNumber();
+	void setSocialContractNumber(String socialContractNumber);
+
+	String getHobby();
+	void setHobby(String hobby);
+
+	int getFavouriteNumber();
+	void setFavouriteNumber(int favouriteNumber);
+
+	String getHash();
+	void setHash(String hash);
+}

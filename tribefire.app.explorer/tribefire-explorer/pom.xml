@@ -1,0 +1,106 @@
+<!--
+Copyright BRAINTRIBE TECHNOLOGY GMBH, Austria, 2002-2022
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+-->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>tribefire.app.explorer</groupId>
+        <artifactId>parent</artifactId>
+        <version>[3.0,3.1)</version>
+    </parent>
+    <artifactId>tribefire-explorer</artifactId>
+    <version>3.0.330</version>
+    <packaging>war</packaging>
+    <properties>
+        <archetype>war</archetype>
+        <!-- Exclude dependencies tagged with 'serverdeps' -->
+        <tagRule.classpath>!serverdeps</tagRule.classpath>
+        <tagRule.classpath>!serverdeps</tagRule.classpath>
+        <gwt-compatible>true</gwt-compatible>
+    </properties>
+    <licenses>
+        <license>
+            <name>Apache License, Version 2.0</name>
+            <url>https://www.apache.org/licenses/LICENSE-2.0</url>
+            <distribution>repo</distribution>
+            <comments>A business-friendly OSS license</comments>
+        </license>
+    </licenses>
+    <dependencies>
+        <dependency>
+            <groupId>tribefire.gwt</groupId>
+            <artifactId>basic-ioc-set-for-gme</artifactId>
+            <scope>compile</scope>
+            <version>${V.tribefire.gwt}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.gwt</groupId>
+            <artifactId>gwt-dev</artifactId>
+            <scope>compile</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>xerces</groupId>
+                    <artifactId>xercesImpl</artifactId>
+                </exclusion>
+            </exclusions>
+            <version>${V.com.google.gwt}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.gwt</groupId>
+            <artifactId>gwt-user</artifactId>
+            <scope>compile</scope>
+            <version>${V.com.google.gwt}</version>
+        </dependency>
+        <dependency>
+            <groupId>tribefire.gwt</groupId>
+            <artifactId>tribefire-gwt-serverdeps</artifactId>
+            <version>${V.tribefire.gwt}</version>
+            <scope>runtime</scope>
+            <?tag serverdeps?>
+        </dependency>
+        <!-- This dependency is needed in the build.xml to collect the classpath -->
+        <dependency>
+            <groupId>com.braintribe.devrock</groupId>
+            <artifactId>file-classpath-classloader</artifactId>
+            <scope>compile</scope>
+            <version>${V.com.braintribe.devrock}</version>
+        </dependency>
+        <!-- Internally required dependencies -->
+        <dependency>
+            <groupId>tribefire.extension.web-api</groupId>
+            <artifactId>web-api-server-initializer</artifactId>
+            <version>${V.tribefire.extension.web-api}</version>
+            <classifier>asset</classifier>
+            <type>man</type>
+            <?tag asset?>
+        </dependency>
+        <dependency>
+            <groupId>tribefire.extension.web-api</groupId>
+            <artifactId>web-rpc-server-module</artifactId>
+            <version>${V.tribefire.extension.web-api}</version>
+            <classifier>asset</classifier>
+            <type>man</type>
+            <?tag asset?>
+        </dependency>
+        <dependency>
+            <groupId>tribefire.extension.web-api</groupId>
+            <artifactId>ws-module</artifactId>
+            <version>${V.tribefire.extension.web-api}</version>
+            <classifier>asset</classifier>
+            <type>man</type>
+            <?tag asset?>
+        </dependency>
+    </dependencies>
+</project>

@@ -1,0 +1,87 @@
+<!--
+Copyright BRAINTRIBE TECHNOLOGY GMBH, Austria, 2002-2022
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+-->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>tribefire.extension.wopi</groupId>
+		<artifactId>parent</artifactId>
+		<version>[2.7,2.8)</version>
+	</parent>
+	<artifactId>wopi-connector</artifactId>
+	<version>2.7.2</version>
+	<properties>
+		<archetype>library</archetype>
+	</properties>
+    <licenses>
+        <license>
+            <name>Apache License, Version 2.0</name>
+            <url>https://www.apache.org/licenses/LICENSE-2.0</url>
+            <distribution>repo</distribution>
+            <comments>A business-friendly OSS license</comments>
+        </license>
+    </licenses>
+	<dependencies>
+		<dependency>
+			<groupId>tribefire.cortex</groupId>
+			<artifactId>gm-client-support</artifactId>
+			<version>${V.tribefire.cortex}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.braintribe.velocity</groupId>
+			<artifactId>velocity-tools</artifactId>
+			<version>${V.com.braintribe.velocity}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>org.slf4j</groupId>
+					<artifactId>slf4j-api</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>tribefire.extension.wopi</groupId>
+			<artifactId>wopi-data-model</artifactId>
+			<version>${V.tribefire.extension.wopi}</version>
+			<?tag asset?>
+		</dependency>
+		<dependency>
+			<groupId>tribefire.extension.wopi</groupId>
+			<artifactId>wopi-deployment-model</artifactId>
+			<version>${V.tribefire.extension.wopi}</version>
+			<?tag asset?>
+		</dependency>
+		<!-- Third party -->
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<version>${V.javax.servlet}</version>
+		</dependency>
+		<dependency>
+			<groupId>net.jodah</groupId>
+			<artifactId>failsafe</artifactId>
+			<version>${V.net.jodah}</version>
+		</dependency>
+		<dependency>
+			<groupId>jakarta.xml.bind</groupId>
+			<artifactId>jakarta.xml.bind-api</artifactId>
+			<version>2.3.3</version>
+		</dependency>
+		<dependency>
+			<groupId>com.sun.xml.bind</groupId>
+			<artifactId>jaxb-impl</artifactId>
+			<version>2.3.6</version>
+		</dependency>
+	</dependencies>
+</project>

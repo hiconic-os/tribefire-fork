@@ -1,0 +1,58 @@
+<!--
+Copyright BRAINTRIBE TECHNOLOGY GMBH, Austria, 2002-2022
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+-->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.braintribe.devrock.ant</groupId>
+	<artifactId>parent</artifactId>
+	<version>1.0.44</version>
+	<packaging>pom</packaging>
+	<properties>
+		<java.version>21</java.version>
+		<V.com.braintribe.devrock.ant>[1.0,1.1)</V.com.braintribe.devrock.ant>
+		<V.com.braintribe.archives>[2.0,2.1)</V.com.braintribe.archives>
+		<V.com.braintribe.common>[2.0,2.1)</V.com.braintribe.common>
+		<V.com.braintribe.devrock>[2.0,2.1)</V.com.braintribe.devrock>
+		<V.com.braintribe.gm>[2.0,2.1)</V.com.braintribe.gm>
+		<V.com.braintribe.execution>[2.0,2.1)</V.com.braintribe.execution>
+		<V.com.braintribe.security>[2.0,2.1)</V.com.braintribe.security>
+		<V.com.braintribe.xml>[2.0,2.1)</V.com.braintribe.xml>
+		<V.com.braintribe.wire>[2.0,2.1)</V.com.braintribe.wire>
+		<!-- Third party libraries -->
+		<V.ant-contrib>1.0b3</V.ant-contrib>
+		<!-- In some cases (e.g. when writing a report) we need the junit library in the ant/lib folder. It is not there by default,
+			hence we have added it as a dependency to devrock-ant-tasks.
+			The version should match the version of JUnit in Ant, which is specified in artifact ant-junit,
+			see e.g. org/apache/ant/ant-junit/1.10.14/ant-junit-1.10.14.pom.
+			Therefore, whenever updating the version of Ant (i.e. V.org.apache.ant), this should be updated accordingly. -->
+		<V.junit>4.13.2</V.junit>
+		<V.org.apache.ant>1.10.14</V.org.apache.ant>
+		<V.org.jacoco>0.8.1</V.org.jacoco>
+		<V.commons-cli>1.2</V.commons-cli>
+		<V.commons-io>2.5</V.commons-io>
+		<V.net.sf.opencsv>1.8</V.net.sf.opencsv>
+		<V.org.apache.bcel>5.2</V.org.apache.bcel>
+		<V.org.apache.velocity>2.1</V.org.apache.velocity>
+		<V.org.slf4j>1.6.0</V.org.slf4j>
+	</properties>
+    <licenses>
+        <license>
+            <name>Apache License, Version 2.0</name>
+            <url>https://www.apache.org/licenses/LICENSE-2.0</url>
+            <distribution>repo</distribution>
+            <comments>A business-friendly OSS license</comments>
+        </license>
+    </licenses>
+</project>

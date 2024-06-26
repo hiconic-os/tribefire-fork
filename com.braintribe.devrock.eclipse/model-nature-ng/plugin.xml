@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Copyright BRAINTRIBE TECHNOLOGY GMBH, Austria, 2002-2022
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+-->
+<?eclipse version="3.4"?>
+<!-- plugin.xml for the model nature builder, pit -->
+<plugin>
+	<extension point="org.eclipse.ui.commands">
+		<category id="com.braintribe.devrock.mnb.nature.ModelNatureCategory" name="Model Nature Commands">
+		</category>
+		<command 
+			id="com.braintribe.devrock.mnb.commands.AssignModelNature"
+			name="Assign Model Nature Command" 
+			categoryId="com.braintribe.devrock.mnb.nature.ModelNatureCategory"
+			defaultHandler="com.braintribe.devrock.mnb.commands.AssignModelNature">
+		</command>
+		<command 
+			id="com.braintribe.devrock.mnb.commands.RemoveModelNature"
+			name="Remove Model Nature Command" 
+			categoryId="com.braintribe.devrock.mnb.nature.ModelNatureCategory"
+			defaultHandler="com.braintribe.devrock.mnb.commands.RemoveModelNature">
+		</command>
+	</extension>
+	
+	<extension point="org.eclipse.ui.commandImages">
+		<image commandId="com.braintribe.devrock.mnb.commands.AssignModelNature" icon="icons/model.png">
+		</image>
+		<image commandId="com.braintribe.devrock.mnb.commands.RemoveModelNature" icon="icons/model.png">
+		</image>
+	</extension>
+	
+	<extension point="org.eclipse.ui.menus">
+	
+			<menuContribution allPopups="true" locationURI="menu:com.braintribe.devrock.maintenance?after=main.maintenance.nature">							        
+				     <!-- build all model projects -->
+			        <dynamic class="com.braintribe.devrock.mnb.commands.DynamicForceAllProjectsBuild" id="com.braintribe.devrock.mnb.commands.DynamicForceAllProjectsBuild" />
+			</menuContribution>
+			
+			<menuContribution allPopups="true" locationURI="popup:com.braintribe.devrock.popup?after=popup.natures">				        
+		        <menu id="com.braintribe.devrock.mb" label="Model support">
+		        	<!-- add model nature -->
+			        <dynamic class="com.braintribe.devrock.mnb.commands.DynamicProjectAddModelNatureCommandItem" id="com.braintribe.devrock.mnb.commands.DynamicProjectAddModelNatureCommandItem">    
+					    <visibleWhen>    
+				    		<with variable="activeMenuSelection">
+					  			<iterate>			  							  				
+						        	<adapt type="org.eclipse.core.resources.IProject">
+						        		<and>				        		
+											<test property="org.eclipse.core.resources.open" value="open"/> 																				        		
+				                         	<not>
+												<test 
+								                  property="org.eclipse.core.resources.projectNature" 
+								                  value="com.braintribe.eclipse.model.nature.ModelNature" />
+				                         	</not>
+			                         	</and>
+						        	</adapt>	                         	
+								</iterate>
+				     		</with>    
+					    </visibleWhen>
+			        </dynamic>
+			        <!-- remove model nature -->
+			        <dynamic class="com.braintribe.devrock.mnb.commands.DynamicProjectRemoveModelNatureCommandItem" id="com.braintribe.devrock.mnb.commands.DynamicProjectRemoveModelNatureCommandItem">    
+					    <visibleWhen>    
+				    		<with variable="activeMenuSelection">
+					  			<iterate>			  				
+						        	<adapt type="org.eclipse.core.resources.IProject">
+						        	<and>				        		
+											<test property="org.eclipse.core.resources.open" value="open"/> 
+											<test 
+						                  		property="org.eclipse.core.resources.projectNature" 
+						                  		value="com.braintribe.eclipse.model.nature.ModelNature" />
+						            </and>
+						        	</adapt>	                         					  																		
+								</iterate>
+				     		</with>    
+					    </visibleWhen>
+			        </dynamic>			          					  
+			        <!-- build selected model projects -->
+			        <dynamic class="com.braintribe.devrock.mnb.commands.DynamicForceProjectBuild" id="com.braintribe.devrock.mnb.commands.DynamicForceProjectBuild"/>    					  
+		       </menu>
+	   	</menuContribution>
+	</extension>
+	
+	<!-- nature builder -->
+	<extension id="com.braintribe.eclipse.model.nature.ModelBuilder" name="ModelBuilder"
+		point="org.eclipse.core.resources.builders">
+
+		<builder hasNature="true">
+			<run class="com.braintribe.devrock.mnb.commands.builder.ModelBuilder">
+				<parameter name="optimize" value="true" />
+				<parameter name="comment" value="Model Builder" />
+			</run>
+		</builder>
+
+	</extension>
+
+	<!-- model nature -->
+	<extension point="org.eclipse.core.resources.natures" id="com.braintribe.eclipse.model.nature.ModelNature"
+		name="Model Nature">
+		<runtime>
+			<run class="com.braintribe.devrock.mnb.natures.ModelNature" />
+		</runtime>
+		<builder id="com.braintribe.eclipse.model.nature.ModelBuilder" />		
+	</extension>
+	
+	 <!-- marker -->	
+	 <extension id="com.braintribe.devrock.mnb.marker.failed" point="org.eclipse.core.resources.markers">
+        <super type="org.eclipse.core.resources.problemmarker"/>      
+        <persistent value="false"/>
+    </extension>
+    
+	<!-- model nature decorator -->
+	<extension point="org.eclipse.ui.decorators">
+		<decorator
+			id="com.braintribe.devrock.mnb.decorators.ModelNatureDecorator"
+			label="Model decorator" state="true" lightweight="true"
+			class="com.braintribe.devrock.mnb.decorators.ModelNatureDecorator"
+			location="TOP_LEFT"
+			objectClass="org.eclipse.core.resources.IResource" 
+			adaptable="true">
+			
+			<description>
+				A decorator to show the model nature of a project
+			</description>
+		</decorator>
+	</extension>
+
+</plugin>

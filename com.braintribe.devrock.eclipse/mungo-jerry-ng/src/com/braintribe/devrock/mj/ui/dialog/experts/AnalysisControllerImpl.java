@@ -1,0 +1,98 @@
+// ============================================================================
+// Copyright BRAINTRIBE TECHNOLOGY GMBH, Austria, 2002-2022
+// 
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+// 
+//     http://www.apache.org/licenses/LICENSE-2.0
+// 
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+// ============================================================================
+package com.braintribe.devrock.mj.ui.dialog.experts;
+
+import java.io.File;
+import java.util.Collection;
+import java.util.List;
+
+import org.eclipse.core.resources.IProject;
+
+import com.braintribe.build.gwt.GwtModule;
+import com.braintribe.build.gwt.ModuleCheckProtocol;
+import com.braintribe.devrock.mj.ui.dialog.tab.AnalysisController;
+
+public class AnalysisControllerImpl implements AnalysisController {
+	
+	private Collection<ModuleCheckProtocol> protocols;
+	private File outputFolder;
+	private File sourceFolder;
+	private IProject project;
+	private List<File> classpathAsFiles;
+	private List<GwtModule> modules;
+
+	@Override
+	public Collection<ModuleCheckProtocol> getProtocols() {
+		return protocols;
+	}
+
+	@Override
+	public void setProtocols(Collection<ModuleCheckProtocol> protocols) {
+		this.protocols = protocols;
+	}
+
+	@Override
+	public File getOutputFolder() {
+		return outputFolder;
+	}
+
+	@Override
+	public void setOutputFolder(File folder) {
+		this.outputFolder = folder;
+	}
+
+	@Override
+	public File getSourceFolder() {
+		return sourceFolder;
+	}
+
+	@Override
+	public void setSourceFolder(File folder) {
+		this.sourceFolder = folder;
+	}
+
+	@Override
+	public IProject getProject() {
+		return project;
+	}
+
+	@Override
+	public void setProject(IProject project) {
+		this.project = project;
+	}
+
+	@Override
+	public List<File> getClasspathAsFiles() {
+		return classpathAsFiles;
+	}
+
+	@Override
+	public void setClasspathAsFiles(List<File> files) {
+		this.classpathAsFiles = files;
+	}
+
+	@Override
+	public List<GwtModule> getModules() {
+		return modules;
+	}
+
+	@Override
+	public void setModules(List<GwtModule> modules) {
+		this.modules = modules;
+
+	}
+
+}

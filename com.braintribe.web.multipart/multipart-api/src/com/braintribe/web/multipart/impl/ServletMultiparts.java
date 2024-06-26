@@ -1,0 +1,88 @@
+// ============================================================================
+// Copyright BRAINTRIBE TECHNOLOGY GMBH, Austria, 2002-2022
+// 
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+// 
+//     http://www.apache.org/licenses/LICENSE-2.0
+// 
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+// ============================================================================
+package com.braintribe.web.multipart.impl;
+
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import com.braintribe.web.multipart.api.FormDataMultipartsBuilder;
+import com.braintribe.web.multipart.api.FormDataWriter;
+import com.braintribe.web.multipart.api.MalformedMultipartDataException;
+
+public abstract class ServletMultiparts extends Multiparts {
+	public static boolean isFormDataMultipartsRequest(HttpServletRequest request) {
+		return isFormDataMultipartsContentType(request.getContentType());
+	}
+	
+	public static MultipartSubFormat getMultipartSubFormat(HttpServletRequest request) {
+		return getMultipartSubFormat(request.getContentType());
+	}
+
+	public static FormDataMultipartsBuilder formDataReader(HttpServletRequest request) throws IOException, MalformedMultipartDataException {
+		if (!isFormDataMultipartsRequest(request)) {
+			throw new MalformedMultipartDataException(
+					"invalid request: expected content type multipart/form-data but found " + request.getContentType());
+		}
+
+		String contentType = request.getContentType();
+		return formDataReader(request.getInputStream(), extractBoundaryFromContentType(contentType));
+	}
+	
+	public static FormDataWriter formDataWriter(HttpServletResponse response) throws IOException {
+		String boundary = generateBoundary();
+		response.setContentType("multipart/form-data; boundary=" + boundary);
+		return formDataWriter(response.getOutputStream(), boundary);
+	}
+}
+
+class ConsoleOutputStream extends OutputStream {
+	private OutputStream delegate;
+	private OutputStream capture;
+
+	public ConsoleOutputStream(OutputStream delegate) throws IOException {
+		super();
+		this.delegate = delegate;
+		this.capture = new FileOutputStream("c:\\braintribe\\research\\rpc.txt", true);
+		this.capture.write("\n==============================================================\n".getBytes());
+	}
+
+	@Override
+	public void write(int b) throws IOException {
+		delegate.write(b);
+		this.capture.write(b);
+	}
+
+	@Override
+	public void write(byte[] b) throws IOException {
+		delegate.write(b);
+		this.capture.write(b);
+	}
+
+	@Override
+	public void write(byte[] b, int off, int len) throws IOException {
+		delegate.write(b, off, len);
+		this.capture.write(b, off, len);
+	}
+
+	@Override
+	public void flush() throws IOException {
+		delegate.flush();
+	}
+}

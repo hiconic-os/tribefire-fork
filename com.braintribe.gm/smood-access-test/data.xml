@@ -1,0 +1,17 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!--
+Copyright BRAINTRIBE TECHNOLOGY GMBH, Austria, 2002-2022
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+-->
+<?gm-xml version="4"?><gm-data><required-types><t alias='Resource^Cf7YT3' num='2'>com.braintribe.model.resource.Resource</t></required-types><root-value><S><r>Resource^Cf7YT3-0</r><r>Resource^Cf7YT3-1</r></S></root-value><pool><E id='Resource^Cf7YT3-0'><s p='globalId'>78891ae3-e9a3-4293-9f11-3a09a7fd6716</s><s p='id'>SSI_1</s></E><E id='Resource^Cf7YT3-1'><s p='globalId'>2bd23bd8-deb6-4237-a4d1-6e24fdf6ff3a</s><s p='id'>SSI_2</s></E></pool></gm-data>

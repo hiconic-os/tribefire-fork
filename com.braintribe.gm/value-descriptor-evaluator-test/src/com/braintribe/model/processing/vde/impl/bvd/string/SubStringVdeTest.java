@@ -1,0 +1,71 @@
+// ============================================================================
+// Copyright BRAINTRIBE TECHNOLOGY GMBH, Austria, 2002-2022
+// 
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+// 
+//     http://www.apache.org/licenses/LICENSE-2.0
+// 
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+// ============================================================================
+package com.braintribe.model.processing.vde.impl.bvd.string;
+
+import java.util.Date;
+
+import org.junit.Test;
+
+import com.braintribe.model.bvd.string.SubString;
+import com.braintribe.model.processing.vde.evaluator.api.VdeRuntimeException;
+
+public class SubStringVdeTest extends AbstractStringVdeTest {
+
+	@Test
+	public void testStringTwoindicesSubString() throws Exception {
+
+		SubString stringFunction = $.substring();
+		stringFunction.setOperand("HeLLo");
+		stringFunction.setStartIndex(1);
+		stringFunction.setEndIndex(3);
+
+		Object result = evaluate(stringFunction);
+		validateResult(result, "eL");
+
+	}
+
+	@Test
+	public void testStringStartIndexSubString() throws Exception {
+
+		SubString stringFunction = $.substring();
+		stringFunction.setOperand("HeLLo");
+		stringFunction.setStartIndex(1);
+
+		Object result = evaluate(stringFunction);
+		validateResult(result, "eLLo");
+
+	}
+
+	@Test(expected = VdeRuntimeException.class)
+	public void testNullStartIndexSubString() throws Exception {
+
+		SubString stringFunction = $.substring();
+
+		evaluate(stringFunction);
+
+	}
+
+	@Test(expected = VdeRuntimeException.class)
+	public void testRandomOperandSubString() throws Exception {
+
+		SubString stringFunction = $.substring();
+		stringFunction.setOperand(new Date());
+		stringFunction.setStartIndex(1);
+
+		evaluate(stringFunction);
+
+	}
+}
